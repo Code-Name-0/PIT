@@ -30,9 +30,9 @@ module.exports = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: 'auto', // 'auto' respects trust proxy + X-Forwarded-Proto header
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax', // changed from 'strict' to allow cross-site redirects
         maxAge: 30 * 60 * 1000 // 30 minutes
     }
 };

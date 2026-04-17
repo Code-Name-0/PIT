@@ -12,6 +12,10 @@ const staticRoutes = require('./routes/static');
 
 const app = express();
 
+// Trust reverse proxy (Railway/production)
+// This allows secure cookies to work when Railway's reverse proxy handles HTTPS
+app.set('trust proxy', 1);
+
 // Security
 app.use(helmet({
     contentSecurityPolicy: {
@@ -49,6 +53,12 @@ app.use((req, res, next) => {
         userId: req.session.userId || null,
         username: req.session.username || null
     };
+    
+    // Debug logging (remove in production if needed)
+    if (req.session.userId) {
+        console.log(`[Auth] User logged in: ${req.session.username} (ID: ${req.session.userId})`);
+    }
+    
     next();
 });
 

@@ -102,8 +102,17 @@ router.post('/login', async (req, res) => {
             req.session.userId = user.id;
             req.session.username = user.username;
 
-            // Redirect to main page
-            res.redirect('/');
+            // Save session before redirecting to ensure it's persisted
+            req.session.save((saveErr) => {
+                if (saveErr) {
+                    console.error('Session save error:', saveErr);
+                    return res.render('login.html', {
+                        error: 'Login failed. Please try again.'
+                    });
+                }
+                // Redirect to main page
+                res.redirect('/');
+            });
         });
 
     } catch (error) {
