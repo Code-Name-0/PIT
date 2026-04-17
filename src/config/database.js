@@ -80,15 +80,10 @@ async function runMigrations() {
 }
 
 /**
- * Seed database if empty (development only)
+ * Seed database if empty (both dev and production)
  */
 async function seedDatabase() {
     try {
-        if (isProduction) {
-            console.log('[DB] Skipping seed in production');
-            return;
-        }
-
         // Check if users table has data
         const userCount = await db('users').count('* as count').first();
         if (userCount.count === 0) {
