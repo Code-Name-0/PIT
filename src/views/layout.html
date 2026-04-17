@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Post-it Social{% endblock %}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <header>
+        {% if user %}
+        Welcome, user {{ user }}!
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+        {% endif %}
+    </header>
+    {% block content %}{% endblock %}
+</body>
+
+</html>
