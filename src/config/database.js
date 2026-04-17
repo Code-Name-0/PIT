@@ -86,12 +86,14 @@ async function seedDatabase() {
     try {
         // Check if users table has data
         const userCount = await db('users').count('* as count').first();
-        if (userCount.count === 0) {
+        const count = parseInt(userCount.count, 10);
+        
+        if (count === 0) {
             console.log('[DB] Database is empty, running seeds...');
             await db.seed.run();
             console.log('[DB] Seeds executed successfully');
         } else {
-            console.log(`[DB] Database already has ${userCount.count} users, skipping seed`);
+            console.log(`[DB] Database already has ${count} users, skipping seed`);
         }
     } catch (error) {
         console.error('[DB] Error seeding database:', error);
