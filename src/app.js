@@ -53,12 +53,12 @@ app.use((req, res, next) => {
         userId: req.session.userId || null,
         username: req.session.username || null
     };
-    
+
     // Debug logging (remove in production if needed)
     if (req.session.userId) {
         console.log(`[Auth] User logged in: ${req.session.username} (ID: ${req.session.userId})`);
     }
-    
+
     next();
 });
 

@@ -13,7 +13,7 @@ exports.seed = async (knex) => {
         password_hash: adminHash,
         created_at: knex.fn.now()
     }).returning('id');
-    
+
     const adminId = adminResult[0].id;
 
     // Assign all 4 roles to admin
@@ -33,7 +33,7 @@ exports.seed = async (knex) => {
         password_hash: userHash,
         created_at: knex.fn.now()
     }).returning('id');
-    
+
     const userId = userResult[0].id;
 
     // Assign create role to normal user
@@ -47,7 +47,7 @@ exports.seed = async (knex) => {
 
     // 3. Create seed posts (4 total: 2 from admin, 2 from user)
     const now = new Date();
-    
+
     // Admin posts
     await knex('posts').insert([
         {
