@@ -8,12 +8,11 @@ exports.seed = async (knex) => {
 
     // 1. Create admin user
     const adminHash = await bcryptjs.hash('admin123', 10);
-    const adminResult = await knex('users').insert({
+    const [adminId] = await knex('users').insert({
         username: 'admin',
         password_hash: adminHash,
         created_at: knex.fn.now()
-    });
-    const adminId = adminResult[0];
+    }).returning('id');
 
     // Assign all 4 roles to admin
     await knex('user_roles').insert({
@@ -52,12 +51,11 @@ exports.seed = async (knex) => {
 
     // 3. Create test users (optional, for testing)
     const testUser1Hash = await bcryptjs.hash('test123', 10);
-    const testUser1Result = await knex('users').insert({
+    const [testUser1Id] = await knex('users').insert({
         username: 'testuser1',
         password_hash: testUser1Hash,
         created_at: knex.fn.now()
-    });
-    const testUser1Id = testUser1Result[0];
+    }).returning('id');
 
     await knex('user_roles').insert({
         user_id: testUser1Id,
@@ -76,12 +74,11 @@ exports.seed = async (knex) => {
     });
 
     const testUser2Hash = await bcryptjs.hash('test456', 10);
-    const testUser2Result = await knex('users').insert({
+    const [testUser2Id] = await knex('users').insert({
         username: 'testuser2',
         password_hash: testUser2Hash,
         created_at: knex.fn.now()
-    });
-    const testUser2Id = testUser2Result[0];
+    }).returning('id');
 
     await knex('user_roles').insert({
         user_id: testUser2Id,
