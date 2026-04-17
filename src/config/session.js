@@ -8,9 +8,11 @@ let sessionStore;
 
 if (isProduction) {
     // Production: use PostgreSQL session store
+    // Pass the knex pool directly - connect-pg-simple will use it
     sessionStore = new pgSession({
-        pool: db.client,
-        tableName: 'session'
+        pool: db.client.pool || db.client,
+        tableName: 'session',
+        pruneSessionInterval: 60 // prune expired sessions every 60 seconds
     });
 } else {
     // Development: use default memory store (fine for dev)
