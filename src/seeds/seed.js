@@ -17,82 +17,88 @@ exports.seed = async (knex) => {
     const adminId = adminResult[0].id;
 
     // Assign all 4 roles to admin
-    await knex('user_roles').insert({
-        user_id: adminId,
-        role: 'create',
-        created_at: knex.fn.now()
-    });
-    await knex('user_roles').insert({
-        user_id: adminId,
-        role: 'modify',
-        created_at: knex.fn.now()
-    });
-    await knex('user_roles').insert({
-        user_id: adminId,
-        role: 'delete',
-        created_at: knex.fn.now()
-    });
-    await knex('user_roles').insert({
-        user_id: adminId,
-        role: 'admin',
-        created_at: knex.fn.now()
-    });
+    await knex('user_roles').insert([
+        { user_id: adminId, role: 'create', created_at: knex.fn.now() },
+        { user_id: adminId, role: 'modify', created_at: knex.fn.now() },
+        { user_id: adminId, role: 'delete', created_at: knex.fn.now() },
+        { user_id: adminId, role: 'admin', created_at: knex.fn.now() }
+    ]);
 
     console.log('✓ Admin user created (username: admin, password: admin123)');
 
-    // 2. Create guest user (for unauthenticated visitors)
-    const guestHash = await bcryptjs.hash('guest_password_' + Date.now(), 10);
-    await knex('users').insert({
-        username: 'guest',
-        password_hash: guestHash,
-        created_at: knex.fn.now()
-    });
-
-    // Guest has ZERO roles (no create, modify, delete, admin)
-    console.log('✓ Guest user created (special user for unauthenticated visitors)');
-
-    // 3. Create test users (optional, for testing)
-    const testUser1Hash = await bcryptjs.hash('test123', 10);
-    const testUser1Result = await knex('users').insert({
-        username: 'testuser1',
-        password_hash: testUser1Hash,
+    // 2. Create normal user
+    const userHash = await bcryptjs.hash('user123', 10);
+    const userResult = await knex('users').insert({
+        username: 'user',
+        password_hash: userHash,
         created_at: knex.fn.now()
     }).returning('id');
     
-    const testUser1Id = testUser1Result[0].id;
+    const userId = userResult[0].id;
 
+    // Assign create role to normal user
     await knex('user_roles').insert({
-        user_id: testUser1Id,
-        role: 'create',
-        created_at: knex.fn.now()
-    });
-    await knex('user_roles').insert({
-        user_id: testUser1Id,
-        role: 'modify',
-        created_at: knex.fn.now()
-    });
-    await knex('user_roles').insert({
-        user_id: testUser1Id,
-        role: 'delete',
-        created_at: knex.fn.now()
-    });
-
-    const testUser2Hash = await bcryptjs.hash('test456', 10);
-    const testUser2Result = await knex('users').insert({
-        username: 'testuser2',
-        password_hash: testUser2Hash,
-        created_at: knex.fn.now()
-    }).returning('id');
-    
-    const testUser2Id = testUser2Result[0].id;
-
-    await knex('user_roles').insert({
-        user_id: testUser2Id,
+        user_id: userId,
         role: 'create',
         created_at: knex.fn.now()
     });
 
-    console.log('✓ Test users created');
-    console.log('  - testuser1 (password: test123) - create, modify, delete roles');
-    console.log('  - testuser2 (password: test456) - create role only');
+    console.log('✓ Normal user created (username: user, password: user123)');
+
+    // 3. Create seed posts (4 total: 2 from admin, 2 from user)
+    const now = new Date();
+    
+    // Admin posts
+    await knex('posts').insert([
+        {
+            text: 'Welcome to Post-it Social! This is my first post as admin.',
+            author_id: adminId,
+            x: 100,
+            y: 100,
+            created_at: new Date(now.getTime() - 3600000), // 1 hour ago
+            updated_at: new Date(now.getTime() - 3600000)
+        },
+        {
+            text: 'Admin can manage everything on this board including user posts.',
+            author_id: adminId,
+            x: 500,
+            y: 150,
+            created_at: new Date(now.getTime() - 1800000), // 30 minutes ago
+            updated_at: new Date(now.getTime() - 1800000)
+        }
+    ]);
+
+    // User posts
+    await knex('posts').insert([
+        {
+            text: 'Hi everyone! I just created my first post on this awesome app.',
+            author_id: userId,
+            x: 300,
+            y: 300,
+            created_at: new Date(now.getTime() - 900000), // 15 minutes ago
+            updated_at: new Date(now.getTime() - 900000)
+        },
+        {
+            text: 'This is really cool - I can drag posts anywhere on the board!',
+            author_id: userId,
+            x: 700,
+            y: 250,
+            created_at: now,
+            updated_at: now
+        }
+    ]);
+
+    console.log('✓ Seed posts created');
+    console.log('  - 2 posts from admin');
+    console.log('  - 2 posts from user');
+    console.log('\n=== Test Accounts ===');
+    console.log('Admin:');
+    console.log('  Username: admin');
+    console.log('  Password: admin123');
+    console.log('  Roles: create, modify, delete, admin');
+    console.log('\nUser:');
+    console.log('  Username: user');
+    console.log('  Password: user123');
+    console.log('  Roles: create');
 };
+
