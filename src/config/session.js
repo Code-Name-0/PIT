@@ -1,16 +1,21 @@
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const db = require('./database');
+const { Pool } = require('pg');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 let sessionStore;
 
 if (isProduction) {
-    // Production: use PostgreSQL session store
-    // Pass the knex pool directly - connect-pg-simple will use it
+    // Production: use PostgreSQL session store with native pg pool
+    // connect-pg-simple requires a native pg.Pool, not a Knex client
+    const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
+    });
+
     sessionStore = new pgSession({
-        pool: db.client.pool || db.client,
+        pool: pool,
         tableName: 'session',
         pruneSessionInterval: 60 // prune expired sessions every 60 seconds
     });
