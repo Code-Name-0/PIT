@@ -12,14 +12,68 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding: 15px;
-    text-align: right;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header a {
-    color: #fff;
-    margin-left: 20px;
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header h1 a {
+    color: white;
     text-decoration: none;
+}
+
+header h1 a:hover {
+    color: #ccc;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.welcome-text {
+    font-size: 14px;
+}
+
+.btn-logout {
+    padding: 8px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #c82333;
+}
+
+.btn-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-link:hover {
+    background-color: #555;
 }
 
 #board {
@@ -59,4 +113,1123 @@ header a {
 
 .form-container button:hover {
     background-color: #0056b3;
+}
+
+/* Authentication Container */
+.auth-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary:active {
+    background-color: #004085;
+}
+
+.auth-container p {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.auth-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    font-size: 14px;
+}
+
+/* Login Widget on Main Page */
+.auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.login-widget {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 350px;
+    width: 90%;
+}
+
+.login-widget h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.login-widget input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.login-widget button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-widget button:hover {
+    background-color: #0056b3;
+}
+
+.login-widget p {
+    margin-top: 15px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.login-widget a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-widget a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+}
+
+/* ==============================
+   BOARD STYLING
+   ============================== */
+
+#board {
+    width: 100%;
+    height: calc(100vh - 100px);
+    /* Account for header height */
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    /* No scrollbars - requirement */
+    display: block;
+}
+
+/* ==============================
+   POST-IT CARD STYLING
+   ============================== */
+
+.post-it {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #ffff99;
+    border: 2px solid #d4d400;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Comic Sans MS', 'Segoe Print', cursive;
+    font-size: 14px;
+    overflow: hidden;
+    word-wrap: break-word;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    user-select: none;
+}
+
+.post-it:hover {
+    transform: rotate(1deg) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.post-it-text {
+    flex: 1;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+.post-it-footer {
+    border-top: 1px solid #d4d400;
+    padding-top: 8px;
+    font-size: 11px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.post-it-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.post-it-date {
+    font-size: 10px;
+    color: #999;
+}
+
+/* Delete & Edit Buttons (Owner Only) */
+.post-it-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.post-it-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+    border: 1px solid #999;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.post-it-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.post-it-btn-edit {
+    color: #0066cc;
+}
+
+.post-it-btn-edit:hover {
+    background-color: #e6f0ff;
+}
+
+.post-it-btn-delete {
+    color: #cc0000;
+}
+
+.post-it-btn-delete:hover {
+    background-color: #ffe6e6;
+}
+
+/* ==============================
+   MODAL STYLING
+   ============================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 25px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+.modal-content textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
+}
+
+.modal-content textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.modal-content input.hidden {
+    display: none;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-btn-submit {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.modal-btn-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modal-btn-cancel:hover {
+    background-color: #d0d0d0;
+}
+
+.modal-error {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    font-size: 13px;
+    display: none;
+}
+
+.modal-error.show {
+    display: block;
+}
+
+/* ==============================
+   ADMIN PANEL STYLING
+   ============================== */
+
+.admin-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+.admin-container h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+    text-align: center;
+}
+
+.admin-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.roles-legend {
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 4px solid #007bff;
+}
+
+.roles-legend h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.roles-legend ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.roles-legend li {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.admin-error {
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    font-size: 14px;
+}
+
+.admin-success {
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+    font-size: 14px;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.user-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.roles-list {
+    margin-bottom: 15px;
+}
+
+.roles-label {
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.no-roles {
+    color: #999;
+    font-size: 13px;
+    margin: 0;
+    font-style: italic;
+}
+
+.roles-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.roles-list li {
+    display: inline-block;
+    background: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin: 3px 3px 3px 0;
+    font-size: 12px;
+    color: #004085;
+    font-weight: bold;
+}
+
+.role-buttons,
+.revoke-buttons {
+    margin-bottom: 15px;
+}
+
+.buttons-label {
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.btn-small {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 3px 3px 3px 0;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-small:hover {
+    background: #0056b3;
+}
+
+.btn-small.btn-danger {
+    background: #dc3545;
+}
+
+.btn-small.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-admin {
+    padding: 8px 15px;
+    background-color: #6f42c1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-left: 15px;
+}
+
+.btn-admin:hover {
+    background-color: #5a32a3;
+}
+
+/* ==============================
+   TABLET RESPONSIVE (768px and below)
+   ============================== */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .welcome-text {
+        font-size: 13px;
+    }
+
+    .btn-link,
+    .btn-logout,
+    .btn-admin {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        min-height: 44px;
+    }
+
+    #board {
+        height: calc(100vh - 150px);
+    }
+
+    /* Post-it cards - reduce size for tablet */
+    .post-it {
+        width: 160px;
+        height: 160px;
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .post-it-text {
+        font-size: 12px;
+        margin-bottom: 8px;
+        -webkit-line-clamp: 5;
+    }
+
+    .post-it-footer {
+        font-size: 10px;
+        padding-top: 6px;
+    }
+
+    .post-it-author {
+        font-size: 10px;
+    }
+
+    .post-it-date {
+        font-size: 9px;
+    }
+
+    .post-it-actions {
+        margin-top: 6px;
+        gap: 3px;
+    }
+
+    .post-it-btn {
+        padding: 3px 6px;
+        font-size: 10px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Modal responsive */
+    .modal-content {
+        width: 95%;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 16px;
+    }
+
+    .modal-content textarea {
+        height: 120px;
+        font-size: 13px;
+    }
+
+    .modal-buttons {
+        flex-direction: column-reverse;
+    }
+
+    .modal-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 13px;
+        min-height: 44px;
+    }
+
+    /* Auth forms */
+    .auth-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .auth-container input {
+        padding: 12px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .auth-container button {
+        min-height: 44px;
+        font-size: 14px;
+    }
+
+    /* Login widget overlay */
+    .login-widget {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .login-widget input {
+        min-height: 44px;
+        padding: 12px;
+    }
+
+    .login-widget button {
+        min-height: 44px;
+        font-size: 14px;
+    }
+
+    /* Admin panel */
+    .admin-container {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .users-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-card {
+        padding: 15px;
+    }
+
+    .btn-small {
+        padding: 8px 10px;
+        font-size: 11px;
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Form container */
+    .form-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .form-group input {
+        min-height: 44px;
+        padding: 12px;
+    }
+}
+
+/* ==============================
+   MOBILE RESPONSIVE (480px and below)
+   ============================== */
+
+@media (max-width: 480px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    header {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    header h1 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    header h1 a {
+        text-decoration: none;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .welcome-text {
+        font-size: 12px;
+    }
+
+    .btn-link,
+    .btn-logout,
+    .btn-admin {
+        padding: 10px 8px;
+        font-size: 12px;
+        min-height: 44px;
+        display: block;
+        width: 100%;
+    }
+
+    #board {
+        height: calc(100vh - 120px);
+    }
+
+    /* Post-it cards - further reduced for mobile */
+    .post-it {
+        width: 140px;
+        height: 140px;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .post-it-text {
+        font-size: 11px;
+        margin-bottom: 6px;
+        -webkit-line-clamp: 4;
+        line-height: 1.3;
+    }
+
+    .post-it-footer {
+        font-size: 9px;
+        padding-top: 5px;
+    }
+
+    .post-it-author {
+        font-size: 9px;
+    }
+
+    .post-it-date {
+        font-size: 8px;
+    }
+
+    .post-it-actions {
+        margin-top: 5px;
+        gap: 2px;
+    }
+
+    .post-it-btn {
+        padding: 4px 6px;
+        font-size: 9px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Modal - full mobile experience */
+    .modal {
+        z-index: 2000;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-width: 360px;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .modal-content h2 {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .modal-content label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .modal-content textarea {
+        height: 100px;
+        font-size: 12px;
+        padding: 8px;
+        min-height: 100px;
+    }
+
+    .modal-buttons {
+        flex-direction: column-reverse;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .modal-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 13px;
+        min-height: 44px;
+        border-radius: 4px;
+    }
+
+    .modal-error {
+        font-size: 12px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Auth pages */
+    body {
+        font-size: 14px;
+    }
+
+    .auth-container {
+        width: 95%;
+        margin: 15px auto;
+        padding: 15px;
+        max-width: none;
+    }
+
+    .auth-container h1 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        font-size: 13px;
+        min-height: 44px;
+        border: 1px solid #ddd;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    .auth-container button {
+        width: 100%;
+        padding: 12px;
+        min-height: 44px;
+        font-size: 13px;
+    }
+
+    .auth-container p {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 15px;
+    }
+
+    /* Login widget */
+    .login-widget {
+        width: 90%;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    .login-widget h2 {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .login-widget input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 12px;
+        font-size: 13px;
+        min-height: 44px;
+    }
+
+    .login-widget button {
+        width: 100%;
+        padding: 12px;
+        min-height: 44px;
+        font-size: 13px;
+    }
+
+    .login-widget p {
+        font-size: 12px;
+        margin-top: 12px;
+    }
+
+    /* Admin panel */
+    .admin-container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .admin-container h1 {
+        font-size: 16px;
+    }
+
+    .admin-subtitle {
+        font-size: 12px;
+    }
+
+    .roles-legend {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .roles-legend h3 {
+        font-size: 13px;
+    }
+
+    .roles-legend li {
+        font-size: 12px;
+    }
+
+    .users-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .user-card {
+        padding: 12px;
+    }
+
+    .user-card h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .buttons-label {
+        font-size: 12px;
+    }
+
+    .roles-list li {
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+
+    .btn-small {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        font-size: 12px;
+        min-height: 44px;
+    }
+
+    /* Error/Success messages */
+    .admin-error,
+    .admin-success {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* Form container */
+    .form-container {
+        width: 95%;
+        margin: 15px auto;
+        padding: 15px;
+        max-width: none;
+    }
+
+    /* Footer */
+    footer {
+        padding: 10px;
+        font-size: 11px;
+    }
+}
+
+/* ==============================
+   TOUCH-SPECIFIC IMPROVEMENTS
+   ============================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* This targets touch devices */
+
+    /* Remove hover effects on touch devices (they don't see them) */
+    .post-it {
+        transform: none;
+    }
+
+    /* Increase touch target sizes even more on touch devices */
+    button,
+    .modal-btn,
+    .post-it-btn,
+    .btn-small,
+    input,
+    textarea,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Remove default browser zoom on input focus */
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        font-size: 16px;
+    }
+}
+
+/* Prevent pinch-zoom while keeping user-zoom enabled */
+@supports (touch-action: manipulation) {
+
+    button,
+    a,
+    input {
+        touch-action: manipulation;
+    }
 }

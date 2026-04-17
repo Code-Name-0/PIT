@@ -1,6 +1,55 @@
 {% extends "layout.html" %}
 
+{% block title %}Post-it Board - Post-it Social{% endblock %}
+
 {% block content %}
+<!-- User data for JavaScript -->
+<script type="application/json" id="user-data">
+{
+  "username": "{{ user }}",
+  "userId": {{ session.userId or 'null' }},
+  "isAdmin": {{ isAdmin if isAdmin else 'false' }}
+}
+</script>
+
+<!-- Main board -->
 <div id="board"></div>
+
+<!-- Create Post Modal -->
+<div id="create-modal" class="modal">
+    <div class="modal-content">
+        <h2>Create New Post-it</h2>
+        <div class="modal-error"></div>
+        <form id="create-form">
+            <label for="create-text">Your post:</label>
+            <textarea id="create-text" name="text" placeholder="Write your post here..." autocomplete="off"></textarea>
+            <input type="hidden" name="x" value="0">
+            <input type="hidden" name="y" value="0">
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn modal-btn-cancel" data-action="cancel-create">Cancel</button>
+                <button type="submit" class="modal-btn modal-btn-submit">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Post Modal -->
+<div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <h2>Edit Your Post-it</h2>
+        <div class="modal-error"></div>
+        <form id="edit-form">
+            <label for="edit-text">Edit post:</label>
+            <textarea id="edit-text" name="text" placeholder="Edit your post here..." autocomplete="off"></textarea>
+            <input type="hidden" name="post_id" value="0">
+            <div class="modal-buttons">
+                <button type="button" class="modal-btn modal-btn-cancel" data-action="cancel-edit">Cancel</button>
+                <button type="submit" class="modal-btn modal-btn-submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="/js/board.js"></script>
+<script src="/js/ws-client.js"></script>
 {% endblock %}

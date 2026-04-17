@@ -10,14 +10,31 @@
 
 <body>
     <header>
-        {% if user %}
-        Welcome, user {{ user }}!
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
-        {% endif %}
+        <div class="header-left">
+            <h1><a href="/">Post-it Social</a></h1>
+        </div>
+
+        <div class="header-right">
+            {% if user %}
+            <span class="welcome-text">Welcome, <strong>{{ user }}</strong>!</span>
+            {% if isAdmin %}
+            <a href="/admin" class="btn-admin">Admin Panel</a>
+            {% endif %}
+            <a href="/logout" class="btn-logout">Logout</a>
+            {% else %}
+            <a href="/login" class="btn-link">Login</a>
+            <a href="/signup" class="btn-link">Sign Up</a>
+            {% endif %}
+        </div>
     </header>
-    {% block content %}{% endblock %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Post-it Social Application</p>
+    </footer>
 </body>
 
 </html>

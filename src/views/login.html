@@ -1,14 +1,29 @@
 {% extends "layout.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Login - Post-it Social{% endblock %}
 
 {% block content %}
-<div class="form-container">
+<div class="auth-container">
     <h1>Login</h1>
+
+    {% if error %}
+    <div class="error-message">{{ error }}</div>
+    {% endif %}
+
     <form method="POST" action="/login">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required placeholder="Your username">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Your password">
+        </div>
+
+        <button type="submit" class="btn-primary">Login</button>
     </form>
+
+    <p>Don't have an account? <a href="/signup">Sign up here</a></p>
 </div>
 {% endblock %}
