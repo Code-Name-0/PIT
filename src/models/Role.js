@@ -10,7 +10,8 @@ const Role = {
     }
     
     const exists = await db('user_roles')
-      .where({ user_id: userId, role })
+      .where('user_id', userId)
+      .where('role', role)
       .first();
     
     if (!exists) {
@@ -29,7 +30,8 @@ const Role = {
     }
     
     await db('user_roles')
-      .where({ user_id: userId, role })
+      .where('user_id', userId)
+      .where('role', role)
       .del();
   },
 
@@ -40,7 +42,8 @@ const Role = {
     }
     
     const record = await db('user_roles')
-      .where({ user_id: userId, role })
+      .where('user_id', userId)
+      .where('role', role)
       .first();
     
     return !!record;
@@ -49,7 +52,7 @@ const Role = {
   // Get all roles for user
   allRolesForUser: async (userId) => {
     const records = await db('user_roles')
-      .where({ user_id: userId })
+      .where('user_id', userId)
       .select('role');
     
     return records.map(r => r.role);
