@@ -81,23 +81,34 @@ async function runMigrations() {
 
 /**
  * Seed database if empty (both dev and production)
+ * On Railway/production, force seed on startup to ensure admin user exists
  */
 async function seedDatabase() {
     try {
-        // Check if users table has data
-        const userCount = await db('users').count('* as count').first();
-        const count = parseInt(userCount.count, 10);
-        
-        if (count === 0) {
-            console.log('[DB] Database is empty, running seeds...');
-            await db.seed.run();
-            console.log('[DB] Seeds executed successfully');
-        } else {
-            console.log(`[DB] Database already has ${count} users, skipping seed`);
+        // Try to check if users table has data
+        try {
+            const userCount = await db('users').count('* as count').first();
+            const count = parseInt(userCount.count, 10);
+
+            if (count > 0) {
+                console.log(`[DB] Database already has ${count} users, skipping seed`);
+                return;
+            }
+        } catch (tableError) {
+            // Table doesn't exist yet or other query error - continue to seed
+            console.log('[DB] Cannot query users table (likely not created), will attempt seed');
         }
+
+        // If we reach here, either table is empty or doesn't exist - seed it
+        console.log('[DB] Running database seeds...');
+        await db.seed.run();
+        console.log('[DB] ✓ Seeds executed successfully - admin user is ready');
+        console.log('[DB]   Login: admin / admin123');
+
     } catch (error) {
         console.error('[DB] Error seeding database:', error);
         // Don't throw - allow app to continue even if seed fails
+        console.error('[DB] ⚠️  Could not auto-seed - you may need to run: npm run seed');
     }
 }
 
